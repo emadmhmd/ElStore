@@ -1,0 +1,13 @@
+export const AUTH_ATTEMPING = 'AUTH_ATTEMPING' ;
+export const AUTH_SUCCESS = 'AUTH_SUCCESS' ;
+export const AUTH_FAILED = 'AUTH_FAILED' ;
+export const UESR_LOGOUT='UESR_LOGOUT';
+export const USER_ADDED = 'USER_ADDED';
+
+export const SIGN_UP='SIGN_UP_SUCCESS';
+export const SIGN_IN_ATTEMPING='SIGN_IN_ATTEMPING';
+export const SIGN_IN_SUCCESS='SIGN_IN_SUCCESS';
+export const PROFILE_GETTING ='PROFILE_GETTING';
+export const LOG_OUT='LOG_OUT';
+
+
