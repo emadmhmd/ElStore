@@ -33,6 +33,8 @@ customerController.signUp= async (req, res, next) => {
     }
 };
 
+
+
 customerController.signIn=async (req, res, next) => {
     const { email, password } = req.body;
     try {
@@ -64,9 +66,29 @@ customerController.signIn=async (req, res, next) => {
         });
     }
 }
-customerController.getProfile = (req, res, next) => {
+customerController.getUser = (req, res, next) => {
     const { user } = req;
     return res.send({ user })
-
 }
+
+
+customerController.updateUser = async (req, res, next) => {
+    const { userName, mobile, email, address, city, state, password, type,} = req.body;
+    const { user } = req
+    const updatedUser = {
+        userName, mobile, email, address, city, state,  password
+    }
+    try {
+        await Customer.updateOne({ _id: user._id }, updatedUser)
+        return res.send({
+            message: 'The profile updated successfully'
+        });
+    } catch (e) {
+        return res.status(401).send({
+            error: `Fail to update the profile , please try again`
+        });
+    }
+};
+
+
 module.exports=customerController

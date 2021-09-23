@@ -9,9 +9,10 @@ class SignUpCom extends Component {
     _handleFormSubmit = (values, bag) => {
         if (values) {
             const { signUpAction } = this.props;
-            values.type = 1;
+            const { type } = this.props.match.params
+            values.type=type
             signUpAction(values);
-            this.props.history.push('/auth')
+            this.props.history.push('/signIn')
         }
         else {
             bag.isSubmitting(false)

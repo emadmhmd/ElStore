@@ -37,7 +37,7 @@ app.use(passport.session());
 require('./config/passport.js')(passport);
 
 
-mongoose.connect(process.env.store2000_DB_URL , { 
+mongoose.connect(process.env.STORE_DB_URL , { 
   useNewUrlParser: true ,
   useCreateIndex : true
 } );

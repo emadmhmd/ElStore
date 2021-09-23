@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-export default (token)=>{
+const header= (token)=>{
     if(token){
         axios.defaults.headers.common['Authorization'] =`Bearer ${token}`;
 
@@ -9,3 +9,5 @@ export default (token)=>{
         delete axios.defaults.headers.common['Authorization']
     }
 }
+
+export default header

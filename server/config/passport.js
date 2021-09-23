@@ -5,9 +5,10 @@ const User = require('../models/customerModel.js');
 
 module.exports = function(passport){
     let config ={};
-    config.secretOrKey    =process.env.JWT_SECRET;
+    config.secretOrKey =process.env.JWT_SECRET;
     config.jwtFromRequest =extractJwt.fromAuthHeaderAsBearerToken();
-    passport.use(new jwtStartegy(config, async (jwtPayload , done )=>{
+
+    passport.use(new jwtStartegy(config , async (jwtPayload , done )=>{
 
         try {
             const user =await User.findById(jwtPayload._id);

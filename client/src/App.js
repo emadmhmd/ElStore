@@ -1,41 +1,71 @@
 import './App.css';
-import { Route, BrowserRouter, NavLink } from 'react-router-dom';
+import { Route, BrowserRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import React, { Component , Fragment} from 'react';
+import React, { Component } from 'react';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './styles/framwork_defauit.css';
+import './styles/framwork_responsive.css';
+import './styles/framework_rtl.css';
 
 import SignUpCom from './components/customerComponents/signUpCom';
 import SignInCom from './components/customerComponents/signInCom';
 import Header from './components/generalComponents/headerCom';
 import Footer from './components/generalComponents/footerCom';
 
+import ProductsCom from './components/adminComponents/product/productsCom'
+import ProductPageCom from './components/adminComponents/product/productPageCom'
+import ProductsListCom from './components/customerComponents/product/productsListCom'
+//import HomeProductsCom from './components/customerComponents/product/homeProductsCom'
+
+import OrdersCom from './components/customerComponents/order/ordersCom'
+import CartProductsCom from './components/adminComponents/order/cartProductsCom'
+import OrdersListCom from './components/adminComponents/order/ordersListCom'
+import FavCom from './components/customerComponents/fav/favCom'
+import SectionsBarCom from './components/customerComponents/product/sectionBarCom';
+
 
 class App extends Component {
 renderRoutes(){
-  const {signInSuccess}=this.props
+  const {signInSuccess , profile:{type}}=this.props
   
   if(signInSuccess){
-    return(
-      <></>
-    )
+    if(type===2){
+      return(
+        <div>
+          <Route exact path='/products' component={ProductsCom} />
+          <Route exact path='/ordersList' component={OrdersListCom} />
+          <Route exact path='/cartProducts/:cartId' component={CartProductsCom} />
+          
+        </div>
+      )
+    }else{
+      return(
+        <div>
+          <SectionsBarCom />
+          <Route exact path='/products/:section?' component={ProductsListCom} />
+          <Route exact path='/orders' component={OrdersCom} />
+          <Route exact path='/fav' component={FavCom} />
+        </div>
+      )
+    }
+    
   }else{
     return(
       <div>
-        <h1>signInSuccess: {signInSuccess}</h1>
           <Route exact path='/signIn' component={SignInCom} />
-          <Route exact path='/signUp' component={SignUpCom} />
+          <Route exact path='/signUp/:type?' component={SignUpCom} />
       </div>
     )
   }
 }
   render() {
-    const { profile } = this.props;
     return (
       <BrowserRouter>
         <div className="App">
-          
+          <Route exact path='/productPage/:productId' component={ProductPageCom} />
           <Header/>
           {this.renderRoutes()}
-          <h2>{profile.userName}</h2>
           <Footer/>
         </div>
       </BrowserRouter>
@@ -44,7 +74,6 @@ renderRoutes(){
   }
 
 }
-
 
 
 const mapStateToProps = ({ customerReducer }) => {
